@@ -92,12 +92,12 @@ See also:
 
 Non-standard methods are derived from XRegExp's ones, but does not take regexp argument.
 
- *  `addToken` (see [XREgExp docs for `addToken()` method][addToken]).
- *  `forEach` (see [XREgExp docs for `forEach()` method][forEach]).
- *  `globalize` (see [XREgExp docs for `globalize()` method][globalize]).
- *  `match` (see [XREgExp docs for `match()` method][match]).
- *  `replace` (see [XREgExp docs for `replace()` method][replace]).
- *  `split` (see [XREgExp docs for `split()` method][split]).
+ *  `addToken` (see [XRegExp docs for `addToken()` method][addToken]).
+ *  `forEach` (see [XRegExp docs for `forEach()` method][forEach]).
+ *  `globalize` (see [XRegExp docs for `globalize()` method][globalize]).
+ *  `match` (see [XRegExp docs for `match()` method][match]).
+ *  `replace` (see [XRegExp docs for `replace()` method][replace]).
+ *  `split` (see [XRegExp docs for `split()` method][split]).
 
 ### Additional API
 

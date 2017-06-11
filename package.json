@@ -1,6 +1,6 @@
 {
     "name": "xre",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Template string tag for XRegExp.",
     "author": "Alice Klipper <alice.klipper@yandex.com> (https://vk.com/alice.klipper)",
     "keywords": [
