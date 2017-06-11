@@ -1,0 +1,9 @@
+.idea/
+src/
+
+*.iml
+*.lock
+.eslintignore
+.eslintrc.js
+.babelrc
+.browserslistrc

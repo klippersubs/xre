@@ -1,0 +1,45 @@
+{
+    "name": "xre",
+    "version": "1.0.1",
+    "description": "Template string tag for XRegExp.",
+    "author": "Alice Klipper <alice.klipper@yandex.com> (https://vk.com/alice.klipper)",
+    "main": "index.js",
+    "repository": "aliceklipper/xre",
+    "bugs": {
+        "url": "https://github.com/aliceklipper/xre",
+        "email": "alice.klipper@yandex.com"
+    },
+    "license": "MIT",
+    "scripts": {
+        "clean": "rimraf ./index.js ./index.js.map",
+        "prebuild": "yarn run clean",
+        "build": "babel ./src/index.js --out-file ./index.js --source-maps",
+        "prepublish": "yarn run build",
+        "postpublish": "yarn run clean",
+        "lint": "eslint ./src/**/*.{js,jsx}",
+        "test": "jest"
+    },
+    "dependencies": {
+        "babel-preset-flow": "^6.23.0",
+        "taghelper": "^1.0.3",
+        "xregexp": "^3.2.0"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.24.1",
+        "babel-eslint": "^7.2.3",
+        "babel-jest": "^20.0.3",
+        "babel-preset-env": "^1.5.2",
+        "eslint": "^3.19.0",
+        "eslint-config-google": "^0.8.0",
+        "eslint-config-prettier": "^2.1.1",
+        "eslint-plugin-flowtype": "^2.34.0",
+        "eslint-plugin-prettier": "^2.1.1",
+        "jest": "^20.0.4",
+        "prettier": "^1.4.4",
+        "regenerator-runtime": "^0.10.5",
+        "rimraf": "^2.6.1"
+    },
+    "jest": {
+        "testRegex": "(/test/.*|(\\.|/)(test|spec))\\.jsx?$"
+    }
+}
