@@ -1,5 +1,7 @@
 import { join } from 'taghelper';
-import XRegExp from 'xregexp';
+import DefaultXRegExp from 'xregexp/src/xregexp';
+
+let _XRegExp = DefaultXRegExp;
 
 /**
  * Native `RegExp#exec()` result type.
@@ -52,21 +54,25 @@ interface IForEachCallback {
     (match: IXRegExpExecResult[], index: number, string: string, xre: RegExp): void,
 }
 
-const expression = new XRegExp('^/(?<source>.*)/(?<flags>.*)$', 's');
+const expression = /^\/([\s\S]*)\/(.*)$/;
+
+export function configure({ XRegExp } = { XRegExp: DefaultXRegExp }) {
+    _XRegExp = XRegExp;
+}
 
 export class Xre {
     _regexp: RegExp;
 
     constructor(input) {
-        const parsed = XRegExp.exec(input, expression);
+        const parsed = expression.exec(input);
 
         if (parsed === null) {
             Object.defineProperty(this, '_regexp', {
-                value: XRegExp.cache(`${input}`, 'Amsux'),
+                value: _XRegExp.cache(`${input}`, 'msux'),
             });
         } else {
             Object.defineProperty(this, '_regexp', {
-                value: XRegExp.cache(parsed.source, Array.from(new Set(parsed.flags.split(''))).join('')),
+                value: _XRegExp.cache(parsed[1], Array.from(new Set(parsed[2].split(''))).join('')),
             });
         }
     }
@@ -132,11 +138,11 @@ export class Xre {
     }
 
     exec(string: string, position?: number, sticky?: boolean | string): IXRegExpExecResult | null {
-        return XRegExp.exec(string, this._regexp, position || this._regexp.lastIndex, sticky);
+        return _XRegExp.exec(string, this._regexp, position || this._regexp.lastIndex, sticky);
     }
 
     test(string: string, position?: number, sticky?: boolean | string): boolean {
-        return XRegExp.test(string, this._regexp, position || this._regexp.lastIndex, sticky);
+        return _XRegExp.test(string, this._regexp, position || this._regexp.lastIndex, sticky);
     }
 
     toString() {
@@ -149,11 +155,11 @@ export class Xre {
     // XRegExp methods
 
     addToken(handler: IAddTokenHandler, options: IAddTokenOptions) {
-        XRegExp.addToken(this._regexp, handler, options);
+        _XRegExp.addToken(this._regexp, handler, options);
     }
 
     forEach(string: string, callback: IForEachCallback) {
-        XRegExp.forEach(string, this._regexp, callback);
+        _XRegExp.forEach(string, this._regexp, callback);
     }
 
     globalize(): Xre {
@@ -161,15 +167,15 @@ export class Xre {
     }
 
     match(string: string, scope?: 'one' | 'all'): string | string[] | null {
-        return XRegExp.match(string, this._regexp, scope);
+        return _XRegExp.match(string, this._regexp, scope);
     }
 
     replace(string: string, replacement: string | IReplacementFunction, scope?: 'one' | 'all'): string {
-        return XRegExp.replace(string, this._regexp, replacement, scope);
+        return _XRegExp.replace(string, this._regexp, replacement, scope);
     }
 
     split(string: string, limit?: number): string[] {
-        return XRegExp.split(string, this._regexp, limit);
+        return _XRegExp.split(string, this._regexp, limit);
     }
 
     // Custom methods

@@ -4,7 +4,7 @@ import xre, { Xre } from '../src/index';
 
 describe('Constructor', () => {
     test('Create RegExp with entire literal contents and default flags if no slashes passed', () => {
-        expect(xre`test`.toString()).toBe('/test/Amsux');
+        expect(xre`test`.toString()).toBe('/test/msux');
     });
 
     test('Caching RegExp objects', () => {

@@ -1,32 +1,22 @@
 # xre
 
+[![Travis](https://img.shields.io/travis/aliceklipper/xre.svg?style=flat-square)]()
+[![npm](https://img.shields.io/npm/v/xre.svg?style=flat-square)]()
+[![David](https://img.shields.io/david/aliceklipper/xre.svg?style=flat-square)]()
+[![npm](https://img.shields.io/npm/l/xre.svg?style=flat-square)]()
+
  >  [XRegExp][xregexp] regular expressions without the pain in the ass.
 
 ````bash
 $ yarn add xre
 ````
 
+## Examples
+
+### Multi-line RegExp with comments
+
 ````javascript
 import xre from 'xre';
-
-/*
- * Named groups and Unicode support
- */
-
-const fullName = xre`/(?<firstName>\p{Letter}+)\s(?<lastName>\p{Letter}+)/i`;
-
-console.log(fullName.exec('Shit Ass').firstName);
-// → Shit
-
-console.log(fullName.exec('Говно Жопа').firstName);
-// → Говно
-
-console.log(fullName.exec('くそ けつ').firstName);
-// → くそ
-
-/*
- * Multi-line RegExp with comments
- */
 
 const date = xre`/
     (?<year>  \d{4}) - # Year
@@ -38,6 +28,29 @@ const { year, month, day } = date.exec('2017-06-11');
 
 console.log(`Year: ${year}, month: ${month}, day: ${day}`);
 // → Year: 2017, month: 06, day: 11
+````
+
+### Unicode support
+
+````javascript
+import xre, { configure } from 'xre';
+import XRegExp from 'xregexp';
+
+// By default xre uses minimal version of XRegExp,
+// so to use the power add-ons we have to configure it
+// with full version of XRegExp:
+configure({ XRegExp });
+
+const fullName = xre`/(?<firstName>\p{Letter}+)\s(?<lastName>\p{Letter}+)/i`;
+
+console.log(fullName.exec('Shit Ass').firstName);
+// → Shit
+
+console.log(fullName.exec('Говно Жопа').firstName);
+// → Говно
+
+console.log(fullName.exec('くそ けつ').firstName);
+// → くそ
 ````
 
 ## API
@@ -85,6 +98,15 @@ Non-standard methods are derived from XRegExp's ones, but does not take regexp a
  *  `match` (see [XREgExp docs for `match()` method][match]).
  *  `replace` (see [XREgExp docs for `replace()` method][replace]).
  *  `split` (see [XREgExp docs for `split()` method][split]).
+
+### Additional API
+
+#### `configure`
+
+Arguments:
+
+ *  `options`:
+     *  `XRegExp` — XRegExp constructor.
 
 ## Contributing
 
