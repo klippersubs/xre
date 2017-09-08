@@ -37,7 +37,7 @@ import xre, { configure } from 'xre';
 import XRegExp from 'xregexp';
 
 // By default xre uses minimal version of XRegExp,
-// so to use the power add-ons we have to configure it
+// so to use the power of add-ons we have to configure it
 // with full version of XRegExp:
 configure({ XRegExp });
 
